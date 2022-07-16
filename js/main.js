@@ -1,3 +1,4 @@
+//se crea un objeto
 class Auto {
     constructor(marca, modelo, ano, kilometraje, precio) {
         this.marca = marca;                 //Nissan               
@@ -7,10 +8,15 @@ class Auto {
         this.precio = precio;               //1000000
     }
 }
+
+//array para almacenar objetos
 let arregloAutos = [];
 
+//se asigna a evento de boton funcion de agregar auto
 document.getElementById("formulario-alta").addEventListener("submit", agregarAuto);
 
+//en esta funcion se igualan elementos de las casillas a variables para despues
+//asignarlas a un objeto y llamar a otra funcion para desplegar ojetos en un html
 function agregarAuto(e) {
     e.preventDefault();
     let marcaA = document.getElementById("Marca").value;
@@ -24,7 +30,6 @@ function agregarAuto(e) {
 
     if (arregloAutosJSON == null) {
         localStorage.setItem("arregloAutos", JSON.stringify([arregloAutos]));
-        console.log("vacio");
         mostrarAutos([arregloAutos]);
     } else {
         arregloAutosJSON.push(arregloAutos);
@@ -34,11 +39,11 @@ function agregarAuto(e) {
     e.target.reset();
 }
 
-
+//funcion para mostrar objetos en el html
 function mostrarAutos(arregloAutosJSON) {
     let listadoDeAutos = document.getElementById("listadoDeAutos");
     listadoDeAutos.innerHTML = "";
-    //  [{el señor de los anillos},{matrix}]
+    
     arregloAutosJSON.forEach(auto => {
         let li = document.createElement("li");
         li.innerHTML = `
@@ -53,6 +58,7 @@ function mostrarAutos(arregloAutosJSON) {
     });
 }
 
+//funcion para eliminar objeto especifico del array
 function eliminarAuto(auto) {
     console.log(auto);
     const arregloAutosJSON = JSON.parse(localStorage.getItem("arregloAutos"));
